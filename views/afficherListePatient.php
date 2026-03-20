@@ -1,6 +1,3 @@
-<h3>Gestion des patients</h3>
-<br />
-
 <!-- Combobox pour sélectionner la clinique -->
 <form method="GET" action="patientController.php">
     <input type="hidden" name="action" value="afficherListePatient">
@@ -8,17 +5,16 @@
     <select name="nomClinique" id="nomCliniqueSelect" onchange="this.form.submit()">
         <option value="">-- Sélectionner une clinique --</option>
         <?php foreach ($toutesLesCliniques as $c): ?>
-            <option value="<?php echo $c->getNom(); ?>" <?php echo (isset($_GET["nomClinique"]) && $_GET["nomClinique"] == $c->getNom()) ? 'selected' : ''; ?>>
+            <option value="<?php echo $c->getNom(); ?>" <?php echo(isset($_GET["nomClinique"]) && $_GET["nomClinique"] == $c->getNom()) ? 'selected' : ''; ?>>
                 <?php echo $c->getNom(); ?>
             </option>
-        <?php endforeach; ?>
+        <?php
+endforeach; ?>
     </select>
 </form>
 
-<br />
-
 <?php if (isset($_GET["nomClinique"]) && $_GET["nomClinique"] != ""): ?>
-    <h4>Liste des patient(s) pour la clinique : <?php echo $_GET["nomClinique"]; ?> (<?php echo count($listePatient); ?> Patient(s))</h4>
+    <h3>Liste des patient(s) (<?php echo count($listePatient); ?> Patient(s))</h3>
     <br />
     <table>
             <tr>
@@ -36,25 +32,24 @@
             </tr>
             <!--Formulaire pour la modification et la suppression de patients... -->
             <form method="">
-                <?php
-                    foreach ($listePatient as $patient) 
-                    {
-                        echo "<tr>";
-                        echo "<td>" . $patient->getNoDossier() . "</td>";
-                        echo "<td>" . $patient->getNoAssuranceMaladie() . "</td>";
-                        echo "<td>" . $patient->getNom() . "</td>";
-                        echo "<td>" . $patient->getPrenom() . "</td>";
-                        echo "<td>" . $patient->getAdresse() . "</td>";
-                        echo "<td>" . $patient->getVille() . "</td>";
-                        echo "<td>" . $patient->getProvince() . "</td>";
-                        echo "<td>" . $patient->getCodePostal() . "</td>";
-                        echo "<td>" . $patient->getTelephone() . "</td>";
-                        echo "<td>" . $patient->getCourriel() . "</td>";
-                        echo '<td><input value="Modifier" onclick="document.getElementById(\'noDossier\').value =\'' . $patient->getNoDossier() . '\'; document.getElementById(\'nomCliniqueInput\').value =\'' . $_GET["nomClinique"] . '\'; this.form.action=\'patientController.php\'; this.form.method=\'GET\'; document.getElementById(\'actionInput\').value=\'formulaireModifierPatient\'; submit();" type="button">';
-                        echo '<input value="Supprimer" type="button" onclick="if (confirm(\'Voulez-vous vraiment supprimer le patient : ' .  $patient->getNom() . ' ' . $patient->getPrenom() . '\')) { document.getElementById(\'noDossier\').value = \'' . $patient->getNoDossier() . '\'; document.getElementById(\'nomCliniqueInput\').value =\'' . $_GET["nomClinique"] . '\'; this.form.action =\'patientController.php?action=supprimerPatient&nomClinique=' . $_GET["nomClinique"] . '\'; this.form.method = \'POST\'; submit();}"></td>';
-                        echo "</tr>";
-                    }
-                ?>
+                <?php foreach ($listePatient as $patient): ?>
+                    <tr>
+                        <td><?= $patient->getNoDossier() ?></td>
+                        <td><?= $patient->getNoAssuranceMaladie() ?></td>
+                        <td><?= $patient->getNom() ?></td>
+                        <td><?= $patient->getPrenom() ?></td>
+                        <td><?= $patient->getAdresse() ?></td>
+                        <td><?= $patient->getVille() ?></td>
+                        <td><?= $patient->getProvince() ?></td>
+                        <td><?= $patient->getCodePostal() ?></td>
+                        <td><?= $patient->getTelephone() ?></td>
+                        <td><?= $patient->getCourriel() ?></td>
+                        <td>
+                            <input value="Modifier" onclick="document.getElementById('noDossier').value ='<?= $patient->getNoDossier() ?>'; document.getElementById('nomCliniqueInput').value ='<?= $_GET["nomClinique"] ?>'; this.form.action='patientController.php'; this.form.method='GET'; document.getElementById('actionInput').value='formulaireModifierPatient'; submit();" type="button">
+                            <input value="Supprimer" type="button" onclick="if (confirm('Voulez-vous vraiment supprimer le patient : <?= $patient->getNom() . ' ' . $patient->getPrenom() ?>')) { document.getElementById('noDossier').value = '<?= $patient->getNoDossier() ?>'; document.getElementById('nomCliniqueInput').value ='<?= $_GET["nomClinique"] ?>'; this.form.action ='patientController.php?action=supprimerPatient&nomClinique=<?= $_GET["nomClinique"] ?>'; this.form.method = 'POST'; submit();}">
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
                 <input type="hidden" id="actionInput" name="action" value="formulaireModifierPatient">
                 <input type="hidden" id="noDossier" name="noDossier">
                 <input type="hidden" id="nomCliniqueInput" name="nomClinique">
@@ -69,11 +64,11 @@
         <table>
             <tr>
                 <td><label>No Dossier</label></td>
-                <td><input name="noDossier" required/></td>
+                <td><input type="number" name="noDossier" required/></td>
             </tr>
             <tr>
                 <td><label>No Assurance Maladie</label></td>
-                <td><input name="noAssuranceMaladie" required/></td>
+                <td><input type="number" name="noAssuranceMaladie" required/></td>
             </tr>
             <tr>
                 <td><label>Nom</label></td>
@@ -113,6 +108,8 @@
             </tr>
         </table>
     </form>
-<?php else: ?>
+<?php
+else: ?>
     <p>Veuillez sélectionner une clinique pour voir les patients.</p>
-<?php endif; ?>
+<?php
+endif; ?>

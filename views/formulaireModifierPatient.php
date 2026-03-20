@@ -1,8 +1,8 @@
-<h3>Modification de : <?php echo $patient->getNom() . " " . $patient->getPrenom(); ?></h3>
 <br />
-<a href="patientController.php?action=afficherListePatient&nomClinique=<?php echo $_GET["nomClinique"]; ?>">Annuler</a>
+<b>Modifier un patient : </b>
 <br />
 <br />
+<!--Formulaire pour la modification d'un patient -->
 <form method="POST" action="patientController.php?action=modifierPatient&nomClinique=<?php echo $_GET["nomClinique"]; ?>">
     <table>
         <tr>
@@ -10,8 +10,7 @@
                 <label>No Dossier</label>
             </td>
             <td>
-                <?php echo $patient->getNoDossier(); ?>
-                <input type="hidden" name="noDossier" value="<?php echo $patient->getNoDossier(); ?>" required/>
+                <input name="noDossier" value="<?php echo $patient->getNoDossier(); ?>" readonly class="inputreadonly"/>
             </td>
         </tr>
         <tr>
@@ -19,7 +18,7 @@
                 <label>No Assurance Maladie</label>
             </td>
             <td>
-                <input name="noAssuranceMaladie" value="<?php echo $patient->getNoAssuranceMaladie(); ?>" required/>
+                <input type="number" name="noAssuranceMaladie" value="<?php echo $patient->getNoAssuranceMaladie(); ?>" required/>
             </td>
         </tr>
         <tr>
@@ -90,7 +89,8 @@
             <td>
             </td>
             <td>
-            <input type="submit" value="Modifier" style="width:100px"/>
+                <input type="submit" value="Modifier"/>
+                <input type="button" value="Annuler" onclick="history.back();"/>
             </td>
         </tr>
     </table>

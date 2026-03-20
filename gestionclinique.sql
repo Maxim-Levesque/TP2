@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS patients (
     FOREIGN KEY (id_clinique) REFERENCES cliniques(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Insertion de données de test (optionnel)
+-- Insertion de données de test
 INSERT IGNORE INTO cliniques (nom, adresse, ville, province, codePostal, telephone, courriel) VALUES 
 ('Clinique Santé Magog', '123 Rue Principale', 'Magog', 'Québec', 'J1X 2A4', '819-555-0123', 'info@cliniquesantemagog.ca'),
 ('Hôpital Général', '456 Boul. Université', 'Sherbrooke', 'Québec', 'J1K 2R1', '819-555-0456', 'hopital.general@sherbrooke.ca');
