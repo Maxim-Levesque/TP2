@@ -18,6 +18,9 @@
                         <li class="nav-item">
                             <a style="font-weight:bold" class="nav-link text-dark" href="/controllers/cliniqueController.php">Cliniques</a>
                         </li>
+                        <li class="nav-item">
+                            <a style="font-weight:bold" class="nav-link text-dark" href="/controllers/patientController.php">Patients</a>
+                        </li>
                     </ul>
                 </div>
             </div>
